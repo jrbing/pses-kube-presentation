@@ -10,13 +10,9 @@ Here's an overview of what's included in the repo, along with some descriptions.
 ├── demo
 │   ├── image (contains the files necessary for building the Elasticsearch container image)
 │   ├── manifests (kubernetes manifests for deploying Elasticsearch)
-│   └── data (used for loading sample data into Elasticsearch)
 ├── presentation
-│   ├── diagrams
-│   ├── images
-│   └── pses-kubernetes.key (Keynote presentation)
-└── setup
-    └── terraform (terraform manifests for building out a Kubernetes cluster on Azure AKS)
+│   └── pses-kubernetes.pdf (presentation in pdf format)
+└── terraform (terraform manifests for building out a Kubernetes cluster on Azure AKS)
 ```
 
 ## Additional Resources ##
