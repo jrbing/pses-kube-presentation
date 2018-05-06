@@ -1,0 +1,93 @@
+#
+# ---------------------------------- Cluster -----------------------------------
+#
+cluster:
+  name: ${CLUSTER_NAME}
+
+#
+# ------------------------------------ Node ------------------------------------
+#
+node:
+  name: ${NODE_NAME}
+  master: ${NODE_MASTER}
+  data: ${NODE_DATA}
+
+#
+# ------------------------------------ Path ------------------------------------
+#
+path:
+  data: /data/data
+  logs: /data/log
+  plugins: /elasticsearch/plugins
+  work: /data/work
+
+#
+# ----------------------------------- Memory -----------------------------------
+#
+bootstrap:
+  mlockall: true
+
+#
+# ---------------------------------- Network -----------------------------------
+#
+network.host: ${NETWORK_HOST}
+
+http:
+  port: ${HTTP_PORT}
+  enabled: ${HTTP_ENABLE}
+  compression: true
+  cors:
+    enabled: ${HTTP_CORS_ENABLE}
+    allow-origin: ${HTTP_CORS_ALLOW_ORIGIN}
+
+#
+# --------------------------------- Discovery ----------------------------------
+#
+discovery:
+  zen:
+    ping.unicast.hosts: ${DISCOVERY_SERVICE}
+    minimum_master_nodes: ${NUMBER_OF_MASTERS}
+
+#
+# ---------------------------------- SSL/TLS ----------------------------------
+#
+# When the PeopleSoft callback url is https, install the Peoplesoft Root CA
+# certificate in Elasticsearch truststore.
+#
+orclssl:
+  http:
+    ssl: false
+  transport:
+    ssl: false
+  keystore:
+  keystore_password:
+  truststore:
+  truststore_password:
+  callback: false
+
+#
+# ------------------------------------- ACL ------------------------------------
+#
+acl:
+  cache:
+    delete:
+      interval: 24h
+      bulk_size: 10000
+
+#
+#------------------------------ Mapper Attachments------------------------------
+# -1 indicates that there is no limit in the number of characters extracted
+# from the attachment
+#
+index:
+  mapping:
+    attachment:
+      indexed_chars: -1
+
+#
+#------------------------------ Web Crawler -------------------------------------
+#
+orcl:
+  proxy:
+    host:
+    port:

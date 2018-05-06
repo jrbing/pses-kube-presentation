@@ -1,0 +1,7 @@
+NOTES.md
+demo/data
+presentation/pses-kubernetes.key
+presentation/images
+**/.terraform/*
+*.tfstate
+*.tfstate.*

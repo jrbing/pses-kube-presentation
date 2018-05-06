@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pselasticsearch-lb
+  labels:
+    app: pselasticsearch
+    component: pselasticsearch
+    role: master
+spec:
+  type: LoadBalancer
+  selector:
+    component: pselasticsearch
+    role: master
+  ports:
+  - name: http
+    port: 9200
+    targetPort: 9200
+    protocol: TCP
