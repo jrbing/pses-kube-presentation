@@ -49,6 +49,7 @@ Here's an overview of what's included in the repo, along with some descriptions.
     * [pires/docker-elasticsearch-kubernetes](https://github.com/pires/docker-elasticsearch-kubernetes)
     * [fabric8io/elasticsearch-cloud-kubernetes](https://github.com/fabric8io/elasticsearch-cloud-kubernetes)
 * Additional Components & Tooling
+    * [Cerebro](https://github.com/lmenezes/cerebro)
     * [Clair](https://github.com/coreos/clair)
     * [Prometheus](https://prometheus.io/)
     * [Grafana](https://grafana.com/)
