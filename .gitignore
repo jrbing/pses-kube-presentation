@@ -1,5 +1,5 @@
 NOTES.md
-demo/data
+demo/data/sanitize.py
 presentation/pses-kubernetes.key
 presentation/images
 **/.terraform/*
