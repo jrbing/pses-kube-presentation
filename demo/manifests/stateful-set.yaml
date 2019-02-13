@@ -21,92 +21,92 @@ spec:
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 1
-            podAffinityTerm:
-              topologyKey: "kubernetes.io/hostname"
-              labelSelector:
-                matchLabels:
-                  component: pselasticsearch
-                  role: master
+            - weight: 1
+              podAffinityTerm:
+                topologyKey: "kubernetes.io/hostname"
+                labelSelector:
+                  matchLabels:
+                    component: pselasticsearch
+                    role: master
       initContainers:
-      - name: init-sysctl
-        image: "busybox:latest"
-        imagePullPolicy: IfNotPresent
-        command: ["sysctl", "-w", "vm.max_map_count=262144"]
-        securityContext:
-          privileged: true
+        - name: init-sysctl
+          image: "busybox:latest"
+          imagePullPolicy: IfNotPresent
+          command: ["sysctl", "-w", "vm.max_map_count=262144"]
+          securityContext:
+            privileged: true
       containers:
-      - name: es-master
-        securityContext:
-          privileged: true
-          capabilities:
-            add:
-              - IPC_LOCK
-        image: "iscps.azurecr.io/ps-elasticsearch-demo:2.3.2"
-        imagePullPolicy: Always
-        env:
-        - name: NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
-        - name: NODE_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
-        - name: DISCOVERY_SERVICE
-          value: pselasticsearch-discovery
-        - name: ES_JAVA_OPTS
-          value: "-Xms1024m -Xmx1024m"
-        - name: CLUSTER_NAME
-          value: "PSESCLUSTER"
-        - name: HTTP_ENABLE
-          value: "true"
-        - name: NODE_DATA
-          value: "true"
-        - name: NODE_MASTER
-          value: "true"
-        - name: NUMBER_OF_MASTERS
-          value: "1"
-        - name: ESADMIN_USER
-          valueFrom:
-            secretKeyRef:
-              name: pses-admin
-              key: username
-        - name: ESADMIN_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: pses-admin
-              key: password
-        - name: PEOPLE_USER
-          valueFrom:
-            secretKeyRef:
-              name: pses-user
-              key: username
-        - name: PEOPLE_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: pses-user
-              key: password
-        resources:
-          requests:
-            memory: 1024Mi
-        ports:
-        - containerPort: 9300
-          name: transport
-          protocol: TCP
-        livenessProbe:
-          tcpSocket:
-            port: 9300
-          initialDelaySeconds: 20
-          periodSeconds: 10
-        volumeMounts:
-        - name: storage
-          mountPath: /data
+        - name: es-master
+          securityContext:
+            privileged: true
+            capabilities:
+              add:
+                - IPC_LOCK
+          image: "pseskubedemo.azurecr.io/ps-elasticsearch-demo:2.3.2"
+          imagePullPolicy: Always
+          env:
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: DISCOVERY_SERVICE
+              value: pselasticsearch-discovery
+            - name: ES_JAVA_OPTS
+              value: "-Xms1024m -Xmx1024m"
+            - name: CLUSTER_NAME
+              value: "PSESCLUSTER"
+            - name: HTTP_ENABLE
+              value: "true"
+            - name: NODE_DATA
+              value: "true"
+            - name: NODE_MASTER
+              value: "true"
+            - name: NUMBER_OF_MASTERS
+              value: "1"
+            - name: ESADMIN_USER
+              valueFrom:
+                secretKeyRef:
+                  name: pses-admin
+                  key: username
+            - name: ESADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pses-admin
+                  key: password
+            - name: PEOPLE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: pses-user
+                  key: username
+            - name: PEOPLE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pses-user
+                  key: password
+          resources:
+            requests:
+              memory: 1024Mi
+          ports:
+            - containerPort: 9300
+              name: transport
+              protocol: TCP
+          livenessProbe:
+            tcpSocket:
+              port: 9300
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          volumeMounts:
+            - name: storage
+              mountPath: /data
       # Remove this and uncomment the volumeClaimTemplates section below touse
       # persistent volumes
       volumes:
-      - name: storage
-        emptyDir: {}
+        - name: storage
+          emptyDir: {}
   # volumeClaimTemplates:
   # - metadata:
       # name: storage
