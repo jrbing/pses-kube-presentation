@@ -23,7 +23,7 @@ variable "resource_group_name" {
 variable "resource_group_location" {
   type        = "string"
   description = "Location of the azure resource group."
-  default     = "eastus"
+  default     = "eastus2"
 }
 
 variable "linux_admin_username" {

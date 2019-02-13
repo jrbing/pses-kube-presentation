@@ -5,7 +5,7 @@
 
 MAKEFLAGS += --warn-undefined-variables
 SHELL := /bin/bash
-REGISTRY_HOST = iscps.azurecr.io
+REGISTRY_HOST = pseskubedemo.azurecr.io
 NAME = ps-elasticsearch-demo
 VERSION = 2.3.2
 #VERSION ?= latest

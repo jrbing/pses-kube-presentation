@@ -26,7 +26,7 @@ resource "azurerm_kubernetes_cluster" "aks_container" {
   dns_prefix = "pseskubedemo"
 
   resource_group_name = "${azurerm_resource_group.akc_rg.name}"
-  kubernetes_version  = "1.9.6"
+  kubernetes_version  = "1.11.5"
 
   linux_profile {
     admin_username = "${var.linux_admin_username}"
